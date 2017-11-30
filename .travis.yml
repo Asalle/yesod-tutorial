@@ -1,0 +1,30 @@
+language: haskell
+
+sudo:
+    required
+
+cache:
+    directories:
+        - ~/.stack
+
+before_install:
+    # Download and install stack
+    - mkdir -p ~/.local/bin
+    - export PATH=$HOME/.local/bin:$PATH
+    - wget -qO- https://get.haskellstack.org/ | bash -s -- -d $HOME/.local/bin
+    - stack install yesod-bin --install-ghc
+
+install:
+    stack build
+
+script:
+    stack build
+
+ghc:
+    - "7.10"
+
+notifications:
+    email:
+        on_success: never
+        on_failure: change
+
