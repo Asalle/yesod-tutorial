@@ -71,3 +71,9 @@ commentIds = ("js-commentForm", "js-createCommentTextarea", "js-commentList")
 
 getAllComments :: DB [Entity Comment]
 getAllComments = selectList [] [Asc CommentId]
+
+getEchoR :: String -> Handler Html
+getEchoR theText = do
+    defaultLayout $ do
+        setTitle "My brilliant echo page!"
+        $(widgetFile "echo")
